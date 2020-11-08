@@ -1,0 +1,72 @@
+﻿@model IEnumerable<eTicaret.WebUI.Models.Urun>
+<script src="~/Content/Zeon/js/jquery-1.10.0.min.js"></script>
+<script>
+    $(document).ready(function myfunction() {
+        $(".sepeteAt").click(function myfunction() {
+            var uid = $(this).attr("name");
+            $.ajax({
+                type: "GET",
+                url: "/Home/SepeteEkle",
+                data: { id: uid },
+                success: function myfunction() {
+                    $.ajax({
+                        type: "GET",
+                        url: "/home/MiniSepetwidget",
+                        success: function VeriGetir(veri) {
+                            $(".cart-all").html("");
+                            $(".cart-all").html(veri);
+                            alert("Ürün Sepete Eklendi!");
+
+                        }
+                    })
+                },
+                error: function myfunction() {
+                    alert("Ürün sepete eklenemedi!!");
+                }
+            });
+        });
+    });
+</script>
+    <div class="container">
+        <div class="tesla-carousel" data-tesla-plugin="carousel" data-tesla-container=".tesla-carousel-items" data-tesla-item=">div" data-tesla-autoplay="false" data-tesla-rotate="false">
+            <div class="site-title">
+                <ul class="wrapper-arrows">
+                    <li><i class="icon-517 prev" title="left arrow"></i></li>
+                    <li><i class="icon-501 next" title="right arrow"></i></li>
+                </ul>
+                <div class="site-inside"><span>Yeni Ürünler</span></div>
+            </div>
+            <div class="row">
+                <div class="tesla-carousel-items">
+                    @foreach (var urun in Model)
+                    {
+                        <div class="col-md-3 col-xs-6">
+                            <div class="product">
+                                <div class="product-cover">
+                                    <span class="product-action">
+
+                                    </span>
+                                    <div class="product-cover-hover"><span><a href="/home/urundetay/@urun.Adi">görüntüle</a></span></div>
+                                    @if (urun.Resims.Count > 0)
+                                    {
+                                        <img src="@urun.Resims.FirstOrDefault(x=>x.Varsayilan==false).OrtaYol" alt="product name" />
+                                    }
+                                    
+                                </div>
+                                <div class="product-details">
+                                    <h1><a href="/Home/UrunDetay/@urun.Adi">@urun.Adi</a></h1>
+                                    @*<p>@urun.Aciklama</p>*@
+                                    <div class="product-price">
+                                        <a class="sepeteAt" name="@urun.Id">
+                                            <i class="icon-257" title="add to cart"></i>
+                                        </a>
+                                        @urun.SatiFiyat ₺
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>

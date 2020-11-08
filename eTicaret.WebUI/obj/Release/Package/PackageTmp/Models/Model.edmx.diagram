@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bd76e05bbd2c4c06a255800f1a4e60f3" Name="Diagram1">
+        <EntityTypeShape EntityType="eTicaretModel.aspnet_Applications" Width="1.5" PointX="1.5" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.aspnet_Membership" Width="1.5" PointX="7.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.aspnet_Paths" Width="1.5" PointX="3.75" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.aspnet_PersonalizationAllUsers" Width="1.5" PointX="6" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.aspnet_PersonalizationPerUser" Width="1.5" PointX="8" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.aspnet_Profile" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.aspnet_Roles" Width="1.5" PointX="1.5" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.aspnet_SchemaVersions" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.aspnet_Users" Width="1.5" PointX="0.75" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.aspnet_WebEvent_Events" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.Kargo" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.Kategori" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.Marka" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.Musteri" Width="1.5" PointX="3" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.MusteriAdre" Width="1.5" PointX="5.25" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.OdemeDurum" Width="1.5" PointX="3" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.OzellikDeger" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.OzellikTip" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.Resim" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.Sati" Width="1.5" PointX="5.25" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.SiparisDetay" Width="1.5" PointX="7.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.SiparisDurum" Width="1.5" PointX="3" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.Urun" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="eTicaretModel.UrunOzellik" Width="1.5" PointX="9.75" PointY="4.625" IsExpanded="true" />
+        <AssociationConnector Association="eTicaretModel.FK__aspnet_Me__Appli__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK__aspnet_Pa__Appli__25518C17" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK__aspnet_Ro__Appli__123EB7A3" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK__aspnet_Us__Appli__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK__aspnet_Me__UserI__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK__aspnet_Pe__PathI__2B0A656D" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK__aspnet_Pe__PathI__2EDAF651" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK__aspnet_Pe__UserI__2FCF1A8A" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK__aspnet_Pr__UserI__08B54D69" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_Musteri_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_Satis_Kargo" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_Kategori_Resim" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_OzellikTip_Kategori" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_Urun_Kategori" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_Marka_Resim" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_Urun_Marka" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_MusteriAdres_Musteri" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_Satis_Musteri" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_Satis_OdemeDurum" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_OzellikDeger_OzellikTip" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_UrunOzellik_OzellikDeger" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_UrunOzellik_OzellikTip" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_Resim_Urun" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_Satis_SiparisDurum" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_SiparisDurum_Satis" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_SiparisDurum_Urun" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_UrunOzellik_Urun" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.aspnet_UsersInRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="eTicaretModel.FK_Satis_MusteriAdres" />
+        <EntityTypeShape EntityType="eTicaretModel.Yorum" Width="1.5" PointX="10.5" PointY="13.375" />
+        <AssociationConnector Association="eTicaretModel.FK_Yorum_Musteri" />
+        <AssociationConnector Association="eTicaretModel.FK_Yorum_Urun" />
+        <EntityTypeShape EntityType="eTicaretModel.CC" Width="1.5" PointX="5.25" PointY="27.5" />
+        <EntityTypeShape EntityType="eTicaretModel.Mesajlar" Width="1.5" PointX="5.25" PointY="30.625" />
+        <AssociationConnector Association="eTicaretModel.FK_CC_Musteri" />
+        <AssociationConnector Association="eTicaretModel.FK_Mesajlar_Musteri" />
+        <EntityTypeShape EntityType="eTicaretModel.AVSepet" Width="1.5" PointX="10.5" PointY="16.75" />
+        <AssociationConnector Association="eTicaretModel.FK_AVSepet_Musteri" />
+        <AssociationConnector Association="eTicaretModel.FK_AVSepet_Urun" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

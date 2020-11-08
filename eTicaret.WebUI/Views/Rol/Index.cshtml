@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Roller";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@model List<string>
+
+<section class="panel">
+    <header class="panel-heading">
+        Ünvanlar
+    </header>
+    <div class="panel-body">
+        <div class="adv-table editable-table ">
+            <div class="clearfix">
+                <br />
+                <div class="btn-group">
+                    <a href="/Rol/Ekle" class="btn btn-success">Yeni Ünvan</a>
+                </div>
+            </div>
+            <br />
+            <div class="space15"></div>
+            <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                <thead>
+                    <tr>
+                        <th>Ünvan Adı</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (string rol in Model)
+                    {
+                        <tr class="">
+                            <td>@rol</td>
+                            <td>
+                                <a class="rolSil" href="#" data-roladi="@rol"><i class="icon-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+

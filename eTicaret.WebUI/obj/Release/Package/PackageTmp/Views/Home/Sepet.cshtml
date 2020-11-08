@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "Sepet";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+@model eTicaret.WebUI.App_Classes.Sepet
+
+<script>
+    $(document).ready(function myfunction() {
+        $(".urunSiil").click(function UrunSiil() {
+            var uIkd = $(this).attr("namee");
+
+            $.ajax({
+                type: "GET",
+                url: "/Home/SepetUrunAdetDusur",
+                data: { id: uIkd },
+                success: function myfunction() {
+                    alert("1 adet ürün silindi");
+                    location.reload();    // to reload the same page again
+                    //window.location.href = "/Home/Sepet";   // to go to a new url
+                    //$.ajax({
+                    //    type: "GET",
+                    //    url: "/Home/Sepet",
+                    //    success: function myfunction(veri) {
+                    //        $(".cart-all").html("");
+                    //        $(".cart-all").html(veri);
+
+                    //    }
+                    //});
+                },
+                error: function myfunction() {
+                    alert("Ürün silme esnasında hata oluştu!")
+                    location.reload();
+                }
+            })
+
+        })
+    })
+</script>
+
+<div class="content">
+    <div class="container">
+        <h2>Sepetim</h2>
+
+        <div class="shopping-cart">
+            <div class="shopping-cart-products">
+                <ul class="shopping-product-detail">
+                    <li class="shopping-1">Ürün Resmi</li>
+                    <li class="shopping-2">Ürün Adı</li>
+                    <li class="shopping-3">Açıklama</li>
+                    <li class="shopping-4">Miktar</li>
+                    <li class="shopping-5">Fiyat</li>
+                    <li class="shopping-6">Toplam</li>
+                </ul>
+
+                <ul class="shopping-product-detail">
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model.Urunler)
+                        {
+                            <li class="shopping-1">
+                                @if (item.Urun.Resims != null)
+                                {
+                                    <img src="@item.Urun.Resims.FirstOrDefault(x => x.Varsayilan == false).OrtaYol" alt="product name" />
+                                }
+                            </li>
+                            <li class="shopping-2">
+                                <a href="/home/urundetay/@item.Urun.Adi">@item.Urun.Adi</a>
+                                <p></p>
+                            </li>
+                            <li class="shopping-3">
+                                <p>@item.Urun.Aciklama</p>
+                                <p></p>
+                            </li>
+                            <li class="shopping-4">
+                                <p>@item.Adet</p>
+                            </li>
+                            <li class="shopping-5">
+                                <p>@item.Urun.SatiFiyat.ToString("0.##") ₺</p>
+                            </li>
+                            <li class="shopping-6">
+                                <p>
+                                    @{decimal a = 0;
+                                        a = item.Urun.SatiFiyat * item.Adet; }@a.ToString("0.##") ₺ <button class="urunSiil" namee="@item.Urun.Id">Sil</button>
+                                </p>
+                            </li>
+                        }
+                     }
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="/Home/Index" class="button-7">Alışverişe Devam Et</a>
+                </div>
+                <div class="col-md-5">
+                </div>
+                <div class="col-md-4">
+                    <div class="checkout-total">
+                        @if (Model != null)
+                        {
+                            <p>Ara Toplam : </p>
+                            <p>KDV : %18</p>
+                            <p>Kargo Ücreti : $ 0.00</p>
+                            <p><b>Toplam Tutar:@Model.ToplamTutar.ToString("0.##") ₺</b></p>
+                            <a href="/Siparis/SiparisVer" class="btn btn-success btn-lg">Satın Al</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/Content/Zeon/js/modernizr.custom.63321.js" type="text/javascript"></script>
+<script src="/Content/Zeon/js/jquery-1.10.0.min.js" type="text/javascript"></script>
+<script src="/Content/Zeon/js/jquery-ui.min.js" type="text/javascript"></script>
+<script src="/Content/Zeon/js/bootstrap.js" type="text/javascript"></script>
+<script src="/Content/Zeon/js/placeholder.js" type="text/javascript"></script>
+<script src="/Content/Zeon/js/imagesloaded.pkgd.min.js" type="text/javascript"></script>
+<script src="/Content/Zeon/js/masonry.pkgd.min.js" type="text/javascript"></script>
+<script src="/Content/Zeon/js/jquery.swipebox.min.js" type="text/javascript"></script>
+<script src="/Content/Zeon/js/farbtastic/farbtastic.js" type="text/javascript"></script>
+<script src="/Content/Zeon/js/options.js" type="text/javascript"></script>
+<script src="/Content/Zeon/js/plugins.js" type="text/javascript"></script>
+

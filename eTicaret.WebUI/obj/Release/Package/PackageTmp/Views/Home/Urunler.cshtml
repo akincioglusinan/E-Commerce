@@ -1,0 +1,90 @@
+﻿@model IEnumerable<eTicaret.WebUI.Models.Urun>
+<script src="~/Content/Zeon/js/jquery-1.10.0.min.js"></script>
+<script>
+        //$(document).ready(function myfunction() {
+        //    $(".sepeteAt").click(function myfunction() {
+        //        var uid = $(this).attr("name");
+        //        $.ajax({
+        //            type: "GET",
+        //            url: "/Home/SepeteEkle",
+        //            data: { id: uid },
+        //            success: function myfunction() {
+        //                $.ajax({
+        //                    type: "GET",
+        //                    url: "/home/MiniSepetwidget",
+        //                    success: function VeriGetir(veri) {
+        //                        $(".cart-all").html("");
+        //                        $(".cart-all").html(veri);
+
+        //                    }
+        //                })
+        //            },
+        //            error: function myfunction() {
+        //                alert("Ürün sepete eklenemedi!!");
+        //            }
+        //        });
+        //    });
+        //});
+</script>
+<div class="box">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="product">
+                    <div class="product-cover">
+                        <div class="product-cover-hover"><span><a href="/home/urundetay/@ViewBag.urn.Adi">Göster</a></span></div>
+                        @if (ViewBag.urn.Resims.Count > 0)
+                        {
+                                <a href="/home/urundetay/@ViewBag.urn.Adi"><img src="@ViewBag.urn1.OrtaYol" alt="product name" /></a>
+                        }
+                    </div>
+                    <div class="product-details">
+                        <h1>
+                            <a href="/Home/UrunDetay/@ViewBag.urn.Adi">
+                                @ViewBag.urn.Adi
+                            </a>
+                        </h1>
+                        @*<p>@ViewBag.urn.Aciklama</p>*@
+                        <div class="product-price">
+                            <a class="sepeteAt" name="@ViewBag.urn.Id">
+                                <i class="icon-257" title="add to cart"></i>
+                            </a>
+                            @ViewBag.urn.SatiFiyat ₺
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="tesla-carousel-items">
+                        @foreach (var urun in Model)
+                        {
+
+                            <div class="col-md-6 col-xs-6">
+                                <div class="product">
+                                    <div class="product-cover">
+                                        <div class="product-cover-hover"><span><a href="/home/urundetay/@urun.Adi">Göster</a></span></div>
+                                        @if (urun.Resims.Count > 0)
+                                        {
+                                        <a href="/home/urundetay/@urun.Adi"><img src="@urun.Resims.FirstOrDefault(x=>x.Varsayilan==false).OrtaYol" alt="product name" /></a>
+                                        }
+                                    </div>
+                                    <div class="product-details">
+                                        <h1><a href="/Home/UrunDetay/@urun.Adi">@urun.Adi</a></h1>
+                                        @*<p>@urun.Aciklama</p>*@
+                                        <div class="product-price">
+                                            <a class="sepeteAt" name="@urun.Id">
+                                                <i class="icon-257" title="add to cart"></i>
+                                            </a>
+                                            @urun.SatiFiyat ₺
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

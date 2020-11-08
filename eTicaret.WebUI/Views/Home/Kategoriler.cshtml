@@ -1,0 +1,200 @@
+﻿
+@{
+    ViewBag.Title = "Kategoriler";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+
+@model IEnumerable<eTicaret.WebUI.Models.Urun>
+@*@model eTicaret.WebUI.Models.Urun*@
+
+<script src="~/Content/Zeon/js/jquery-1.10.0.min.js"></script>
+    <script>
+        var globalid = 0;
+        $(document).ready(function myfunction() {           
+            $(".Kategori2").click(function Kategori2() {
+                var uid = $(this).attr("name2");
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/KategoriWidget",
+                    data: { id: uid },
+                    success: function myfunction(veri) {
+                        globalid = uid;
+                        $(".row2").html("");
+                        $(".row2").html(veri);
+                    },
+                    error: function myfunction() {
+
+                    }
+                });
+                
+            });
+        });
+
+        $(document).ready(function myfunction() {
+            $(".sirala").click(function Kategori2() {
+                var uid3 = $(this).attr("name3");
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/KategoriWidget",
+                    data: { siraid: uid3 },
+                    success: function myfunction(veri) {
+                        $(".row2").html("");
+                        $(".row2").html(veri);
+                    },
+                    error: function myfunction() {
+
+                    }
+                });
+
+            });
+        });
+
+        $(document).ready(function myfunction() {
+            $(".Kategori1").click(function Kategori1() {
+                var uid2 = $(this).attr("name1");
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/KategoriWidget",
+                    data: { markaid: uid2, id: globalid },
+                    success: function myfunction(veri) {
+                        $(".row2").html("");
+                        $(".row2").html(veri);
+                    },
+                    error: function myfunction() {
+
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function myfunction() {
+            $(".sepeteAt").click(function myfunction() {
+                var uid = $(this).attr("name");
+                $.ajax({
+                    type: "GET",
+                    url: "/Home/SepeteEkle",
+                    data: { id: uid },
+                    success: function myfunction() {
+                        $.ajax({
+                            type: "GET",
+                            url: "/home/MiniSepetwidget",
+                            success: function VeriGetir(veri) {
+                                $(".cart-all").html("");
+                                $(".cart-all").html(veri);
+
+                            }
+                        })
+                    },
+                    error: function myfunction() {
+                        alert("Ürün sepete eklenemedi!!");
+                    }
+                });
+            });
+        });
+
+    </script>
+
+<div class="content">
+    <div class="container">
+        <div class="all-products-details">
+            <div class="row">
+                <div class="col-md-7"><h2>Kategoriler</h2></div>
+                <form action="/Home/KategoriWidget" method="post">
+                    <div class="col-md-5">
+                        <div class="sort-dropdown float-right">
+                            <span>Ürünleri Sırala <i class="icon-515" title="515"></i></span>
+                            <div class="">
+                                <div class="">
+                                    <ul>
+                                        <li><a class="btn btn-white sirala" name3="1" href="#">Pahalidan Ucuza</a></li>
+                                        <li><a class="btn btn-white sirala" name3="2" href="#">Ucuzdan Pahalıya</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-12 col-xs-6">
+                        <div class="products-dropdown open-dropdown">
+                            <span><i class="icon-515" title="515"></i>Kategoriler</span>
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li><a href="/Home/Kategoriler">Tüm Ürünler</a></li>
+                                    @foreach (var ktg in ViewBag.ktg)
+                                    {
+                                        <li><a class="visited Kategori2" name2="@ktg.Id" href="#" data-toggle="tab">@ktg.Adi</a></li>
+                                    }
+                                </ul>
+</div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="col-md-12 col-xs-6">
+                        <div class="products-dropdown">
+                            <span>Markalar</span>
+                            <ul class="nav nav-pills nav-stacked" >
+                                @foreach (var mrk in ViewBag.mrk)
+                                {
+                                <li> <a class="Kategori1" name1="@mrk.Id" href="#" data-toggle="tab">@mrk.Adi</a></li>
+                                }
+                                
+                            </ul>
+                            <div class="products-dropdown-close"><a href="/Home/Kategoriler">Temizle</a> <i class="icon-456" title="close"></i></div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="row2">
+                        @if (Model != null)
+                        {
+                            foreach (var urn in Model)
+                            {
+                                <div class="col-md-4 col-xs-6">
+                                    <div class="product">
+                                        <div class="product-cover">
+                                            <div class="product-cover-hover"><span><a href="/home/urundetay/@urn.Adi">göster</a></span></div>
+                                            @if (urn.Resims.Count > 0)
+                                            {
+                                                <img src="@urn.Resims.FirstOrDefault(x => x.Varsayilan == false).OrtaYol" alt="product name" />
+                                            }
+                                        </div>
+                                        <div class="product-details">
+                                            <h1><a href="/home/urundetay/@urn.Adi">@urn.Adi</a></h1>
+                                            <div class="product-price">
+                                                <a class="sepeteAt" name="@urn.Id">
+                                                    <i class="icon-257" title="add to cart"></i>
+                                                </a>
+                                                @urn.SatiFiyat ₺
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        @*@{ 
+                            Html.RenderAction("KategoriWidget", "Home");
+                        }*@
+                             
+                    </div>
+                </div>
+
+                <ul class="page-numbers">
+                    <li><span class="page-numbers current">1</span> /</li>
+                    <li><a class="page-numbers" href="#">2</a> /</li>
+                    <li><a class="page-numbers" href="#">3</a> /</li>
+                    <li><a class="page-numbers" href="#">4</a> /</li>
+                    <li><a class="page-numbers" href="#">5</a> /</li>
+                    <li><a class="next page-numbers" href="#">→</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

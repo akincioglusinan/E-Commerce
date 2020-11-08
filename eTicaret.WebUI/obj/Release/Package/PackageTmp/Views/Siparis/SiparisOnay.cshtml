@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "SiparisOnay";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+<div class="container">
+    <div class="col-md-8">
+        <div class="btn-group pull-right">
+                <p><b>Siparişiniz işleme alındı.</b></p>
+                <br /><br />
+                <input type="text" name="onay" class="btn btn-success btn-lg" value="Onay kodunuz: #@ViewBag.spt" disabled</input>
+                <br /><br />
+        </div>
+    </div>
+</div>
+

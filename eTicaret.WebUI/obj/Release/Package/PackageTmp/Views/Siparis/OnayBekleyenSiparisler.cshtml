@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "Onay Bekleyen Siparisler";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@using eTicaret.WebUI.App_Classes
+@model IEnumerable<ViewModel>
+
+<section id="container" class="">
+    <section class="wrapper">
+        <section class="panel">
+            <header class="panel-heading">
+                Onay Bekleyen Siparişler
+            </header>
+            <div class="panel-body">
+                <div class="adv-table">
+                    <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+                        <thead>
+                            <tr>
+                                <th>Tarih</th>
+                                <th>Müşteri</th>
+                                <th class="hidden-phone">Id</th>
+                                <th class="hidden-phone">Tutar</th>
+                                <th class="hidden-phone">Ödeme Durum</th>
+                                <th class="hidden-phone">Sipariş Durum</th>
+                                <th class="hidden"></th>
+                                <th class="hidden-phone">Onay</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                int satid = 0;
+                                foreach (var db in Model)
+                                {
+                                    if (satid != db.satis.Id && db.satis.SiparisDurumID < 3)
+                                    {
+
+
+                                        <tr class="gradeA">
+                                            <td>@db.satis.SatisTarihi</td>
+                                            <td>
+                                                @db.ms.Adi @db.ms.Soyadi - 
+                                                @db.ms.Telefon -
+                                                @db.ms.EMail<br />
+                                                <p>@db.satis.MusteriAdre.Adres</p> 
+                                            </td>
+                                            <td class="hidden-phone">@db.satis.Id</td>
+                                            <td class="center hidden-phone">@db.satis.ToplamTutar.ToString("0.##") ₺</td>
+                                            <td class="hidden">
+                                                @foreach (var dbu in Model)
+                                                {
+                                                    if (db.satis.Id == dbu.sdetay.SatisID && dbu.urunu.Id == dbu.sdetay.UrunID && db.satis.MusteriID == dbu.ms.Id)
+                                                    {
+                                                        <p><b>Ürün Adı: @dbu.urunu.Adi <br />Fiyatı : @dbu.sdetay.Fiyat ₺</b></p>
+                                                    }
+                                                }
+                                            </td>
+                                            <form action="/Siparis/OnayBekleyenSiparisler" method="post">
+                                                <td class="hidden-phone">
+                                                    <select class="form-control m-bot15" name="odid" value="default" required>
+                                                        @if (db.satis.OdemeDurumID != null)
+                                                        {
+                                                            <option value="@db.satis.OdemeDurum.Id" selected="selected">@db.satis.OdemeDurum.Adi</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="" selected="selected">Durum Seçiniz</option>
+                                                        }
+                                                        @foreach (var x in ViewBag.Odurum)
+                                                        {
+                                                            <option value="@x.Id">@x.Adi</option>
+                                                        }
+                                                    </select>
+                                                    <select name="satid" hidden="hidden">
+                                                        <option value="@db.satis.Id"></option>
+                                                    </select>
+
+                                                </td>
+                                                <td class="hidden-phone">
+                                                    <select class="form-control m-bot15" name="sdid" value="default" required>
+                                                        @if (db.satis.SiparisDurumID != null)
+                                                        {
+                                                            <option value="@db.satis.SiparisDurum.Id" selected="selected">@db.satis.SiparisDurum.Adi</option>
+                                                        }
+                                                        @foreach (var x in ViewBag.Sdurum)
+                                                        {
+                                                            <option value="@x.Id">@x.Adi</option>
+                                                        }
+                                                    </select>
+                                                    <select name="satid" hidden="hidden">
+                                                        <option value="@db.satis.Id"></option>
+                                                    </select>
+
+                                                </td>
+                                                <td class="hidden-phone">
+                                                    <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i></button>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    }
+                                    satid = db.satis.Id;
+                                }
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+</section>

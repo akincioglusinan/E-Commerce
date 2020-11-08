@@ -1,0 +1,305 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>eTicaret - @ViewBag.Title</title>
+
+    <!-- Bootstrap core CSS -->
+    <
+    <link href="/Content/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <
+    <link href="/Content/Admin/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <
+    <link href="/Content/Admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <
+    <link href="/Content/Admin/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/Content/Admin/css/owl.carousel.css" type="text/css">
+    <!-- Custom styles for this template -->
+    <
+    <link href="/Content/Admin/css/style.css" rel="stylesheet">
+    <
+    <link href="/Content/Admin/css/style-responsive.css" rel="stylesheet" />
+
+    --
+    <link href="/Content/Admin/assets/advanced-datatable/media/css/demo_page.css" rel="stylesheet" />
+    <link href="/Content/Admin/assets/advanced-datatable/media/css/demo_table.css" rel="stylesheet" />
+    @RenderSection("head", false)
+    <!--external css-->
+    <!-- Custom styles for this template -->
+
+</head>
+
+<body>
+    <section id="container">
+        <!--header start-->
+        <header class="header white-bg">
+            <div class="sidebar-toggle-box">
+                <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
+            </div>
+            <!--logo start-->
+            <a href="/Admin/Index" class="logo">Admin<span> eTicaret </span></a>
+
+            <a href="/Home/Index" class="logo"> - -<span> Site Anasayfa</span></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
+                
+                <!--  notification end -->
+            </div>
+            <div class="top-nav ">
+                <!--search & user info start-->
+                <ul class="nav pull-right top-menu">
+                    <li>
+                        <input type="text" class="form-control search" placeholder="Search">
+                    </li>
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img alt="" src="/Content/Admin/img/avatar1_small.jpg">
+                            <span class="username">@User.Identity.Name</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+                            <li><a href="/Uye/CikisYap"><i class="icon-key"></i> Çıkış Yap</a></li>
+                        </ul>
+                    </li>
+                    <!-- user login dropdown end -->
+                </ul>
+                <!--search & user info end-->
+            </div>
+        </header>
+        <!--header end-->
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse ">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu" id="nav-accordion">
+                    <li>
+                        <a class="active" href="/Admin/Index">
+                            <i class="icon-dashboard"></i>
+                            <span>Anasayfa</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="active" href="/Admin/Urunler">
+                            <i class="icon-dashboard"></i>
+                            <span>Ürünler</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="active" href="/Admin/Kategoriler">
+                            <i class="icon-dashboard"></i>
+                            <span>Kategoriler</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="active" href="/Admin/Markalar">
+                            <i class="icon-dashboard"></i>
+                            <span>Markalar</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="active" href="/Admin/SliderResimleri">
+                            <i class="icon-dashboard"></i>
+                            <span>Slider Resimleri</span>
+                        </a>
+                    </li>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="icon-laptop"></i>
+                            <span>Kullanıcılar</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="/Rol/Index">Ünvanlar</a></li>
+                            <li><a href="/Kullanici/Index">Tüm Kullanıcılar</a></li>
+                            <li><a href="/Rol/Yonetici">Yöneticiler</a></li>
+                            <li><a href="/Rol/Musteri">Müşteriler</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="icon-laptop"></i>
+                            <span>Özellikler</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="/Admin/OzellikTipleri">Özellik Tipleri</a></li>
+                            <li><a href="/Admin/OzellikDegerleri">Özellik Değerleri</a></li>
+                            <li>
+                                <a href="/Admin/UrunOzellikleri">Ürün Özellikleri</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="icon-laptop"></i>
+                            <span>Alışverişler</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="/Siparis/TamamlananSiparisler">Tamamlanan Siparişler</a></li>
+                            <li><a href="/Siparis/OnayBekleyenSiparisler">Onay Bekleyen Siparişler</a></li>
+                            <li><a href="/Siparis/KargoyaVerilenSiparisler">Kargoya Verilen Siparişler</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="icon-book"></i>
+                            <span>Raporlar</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="/Admin/UrunRaporlari">Ürün Raporları</a></li>
+                            <li><a href="/Admin/SatisRaporlari">Satış Raporları</a></li>
+                            <li><a href="/Admin/MusteriRaporlari">Müşteri Raporları</a></li>
+                            <li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        <!--sidebar end-->
+        <!--main content start-->
+        <section id="main-content">
+            @RenderBody()
+        </section>
+        <!--main content end-->
+        <!--footer start-->
+        <br />
+        <footer class="site-footer">
+            <div class="text-center">
+                2020 &copy; eTicaret by MpN
+                <a href="#" class="go-top">
+                    <i class="icon-angle-up"></i>
+                </a>
+            </div>
+        </footer>
+        <!--footer end-->
+    </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    @RenderSection("scripts", false)
+
+    <script src="/Content/Admin/js/jquery.js"></script>
+    <script src="/Content/Admin/js/jquery-1.8.3.min.js"></script>
+    <script src="/Content/Admin/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="/Content/Admin/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="/Content/Admin/js/jquery.scrollTo.min.js"></script>
+    <script src="/Content/Admin/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="/Content/Admin/js/jquery.sparkline.js" type="text/javascript"></script>
+    <script src="/Content/Admin/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="/Content/Admin/js/owl.carousel.js"></script>
+    <script src="/Content/Admin/js/jquery.customSelect.min.js"></script>
+    <script src="/Content/Admin/js/respond.min.js"></script>
+
+    <!--common script for all pages-->
+    <script src="/Content/Admin/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script src="/Content/Admin/js/sparkline-chart.js"></script>
+    <script src="/Content/Admin/js/easy-pie-chart.js"></script>
+    <script src="/Content/Admin/js/count.js"></script>
+
+
+    --
+    @*<script type="text/javascript" language="javascript" src="/Content/Admin/assets/advanced-datatable/media/js/jquery.js"></script>*@
+    <script type="text/javascript" language="javascript" src="/Content/Admin/assets/advanced-datatable/media/js/jquery.dataTables.js"></script>
+
+    <script type="text/javascript">
+        /* Formating function for row details */
+        function fnFormatDetails(oTable, nTr) {
+            var aData = oTable.fnGetData(nTr);
+            var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+            sOut += '<tr><td></td><td>' + aData[5] + '</td></tr>';
+
+            return sOut;
+        }
+
+        $(document).ready(function () {
+            /*
+             * Insert a 'details' column to the table
+             */
+            var nCloneTh = document.createElement('th');
+            var nCloneTd = document.createElement('td');
+            nCloneTd.innerHTML = '<img src="/Content/Admin/assets/advanced-datatable/examples/examples_support/details_open.png">';
+            nCloneTd.className = "center";
+
+            $('#hidden-table-info thead tr').each(function () {
+                this.insertBefore(nCloneTh, this.childNodes[0]);
+            });
+
+            $('#hidden-table-info tbody tr').each(function () {
+                this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+            });
+
+            /*
+             * Initialse DataTables, with no sorting on the 'details' column
+             */
+            var oTable = $('#hidden-table-info').dataTable({
+                "aoColumnDefs": [
+                    { "bSortable": false, "aTargets": [0] }
+                ],
+                "aaSorting": [[1, 'asc']]
+            });
+
+            /* Add event listener for opening and closing details
+             * Note that the indicator for showing which row is open is not controlled by DataTables,
+             * rather it is done here
+             */
+            $('#hidden-table-info tbody td img').live('click', function () {
+                var nTr = $(this).parents('tr')[0];
+                if (oTable.fnIsOpen(nTr)) {
+                    /* This row is already open - close it */
+                    this.src = "/Content/Admin/assets/advanced-datatable/examples/examples_support/details_open.png";
+                    oTable.fnClose(nTr);
+                }
+                else {
+                    /* Open this row */
+                    this.src = "/Content/Admin/assets/advanced-datatable/examples/examples_support/details_close.png";
+                    oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
+                }
+            });
+        });
+    </script>
+
+    <script>
+
+        //owl carousel
+
+        $(document).ready(function () {
+            $("#owl-demo").owlCarousel({
+                navigation: true,
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                singleItem: true,
+                autoPlay: true
+
+            });
+        });
+
+        //custom select box
+
+        $(function () {
+            $('select.styled').customSelect();
+        });
+
+    </script>
+</body>
+</html>
+

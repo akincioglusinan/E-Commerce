@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" href="/Content/Admin/img/favicon.png">
+    <title>Giriş Sayfası</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/Content/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Content/Admin/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="/Content/Admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="/Content/Admin/css/style.css" rel="stylesheet">
+    <link href="/Content/Admin/css/style-responsive.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/Content/Admin/js/html5shiv.js"></script>
+    <script src="/Content/Admin/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="login-body">
+    <div class="container">
+        <form class="form-signin" action="/Uye/GirisYap" method="POST">
+            <h2 class="form-signin-heading">Giriş</h2>
+            <div class="login-wrap">
+                <input type="text" class="form-control" placeholder="E-Mail Adresinizi Giriniz" name="Email" autofocus>
+                <input type="password" class="form-control" placeholder="Parola Giriniz" name="Parola">
+                <label class="checkbox">
+                    <input type="checkbox" name="Hatirla"> Beni Hatırla
+                    <span class="pull-right">
+                        <a href="/Uye/ParolamiUnuttum" data-toggle="modal"> Parolamı Unuttum?</a>
+                    </span>
+                </label>
+                @if (ViewBag.Mesaj != null)
+                {
+                    <p style="color:red">@ViewBag.Mesaj</p>
+                }
+
+                <button class="btn btn-lg btn-login btn-block" type="submit">Giriş Yap</button>
+                <p>Dilerseniz sosyal medya hesaplarınızla bağlanabilirsiniz</p>
+                <div class="login-social-link">
+                    <a href="index.html" class="facebook">
+                        <i class="icon-facebook"></i>
+                        Facebook
+                    </a>
+                    <a href="index.html" class="twitter">
+                        <i class="icon-twitter"></i>
+                        Twitter
+                    </a>
+                </div>
+                <div class="registration">
+                    Henüz kayıt olmadınız mı?
+                    <a class="" href="/Kullanici/GirisYap">
+                        Yeni Hesap Oluştur
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="/Content/Admin/js/jquery.js"></script>
+    <script src="/Content/Admin/js/bootstrap.min.js"></script>
+
+</body>
+</html>

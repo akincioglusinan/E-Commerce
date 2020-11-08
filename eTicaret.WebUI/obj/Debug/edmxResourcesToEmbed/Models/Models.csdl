@@ -1,0 +1,850 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="eTicaretModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="aspnet_Applications">
+    <Key>
+      <PropertyRef Name="ApplicationId" />
+    </Key>
+    <Property Name="ApplicationName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LoweredApplicationName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="aspnet_Membership" Relationship="Self.FK__aspnet_Me__Appli__73BA3083" FromRole="aspnet_Applications" ToRole="aspnet_Membership" />
+    <NavigationProperty Name="aspnet_Paths" Relationship="Self.FK__aspnet_Pa__Appli__25518C17" FromRole="aspnet_Applications" ToRole="aspnet_Paths" />
+    <NavigationProperty Name="aspnet_Roles" Relationship="Self.FK__aspnet_Ro__Appli__123EB7A3" FromRole="aspnet_Applications" ToRole="aspnet_Roles" />
+    <NavigationProperty Name="aspnet_Users" Relationship="Self.FK__aspnet_Us__Appli__6383C8BA" FromRole="aspnet_Applications" ToRole="aspnet_Users" />
+  </EntityType>
+  <EntityType Name="aspnet_Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordFormat" Type="Int32" Nullable="false" />
+    <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MobilePIN" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="LoweredEmail" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordQuestion" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordAnswer" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+    <Property Name="IsLockedOut" Type="Boolean" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastLoginDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastPasswordChangedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastLockoutDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FailedPasswordAttemptCount" Type="Int32" Nullable="false" />
+    <Property Name="FailedPasswordAttemptWindowStart" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FailedPasswordAnswerAttemptCount" Type="Int32" Nullable="false" />
+    <Property Name="FailedPasswordAnswerAttemptWindowStart" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="aspnet_Applications" Relationship="Self.FK__aspnet_Me__Appli__73BA3083" FromRole="aspnet_Membership" ToRole="aspnet_Applications" />
+    <NavigationProperty Name="aspnet_Users" Relationship="Self.FK__aspnet_Me__UserI__74AE54BC" FromRole="aspnet_Membership" ToRole="aspnet_Users" />
+  </EntityType>
+  <EntityType Name="aspnet_Paths">
+    <Key>
+      <PropertyRef Name="PathId" />
+    </Key>
+    <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+    <Property Name="PathId" Type="Guid" Nullable="false" />
+    <Property Name="Path" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LoweredPath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="aspnet_Applications" Relationship="Self.FK__aspnet_Pa__Appli__25518C17" FromRole="aspnet_Paths" ToRole="aspnet_Applications" />
+    <NavigationProperty Name="aspnet_PersonalizationAllUsers" Relationship="Self.FK__aspnet_Pe__PathI__2B0A656D" FromRole="aspnet_Paths" ToRole="aspnet_PersonalizationAllUsers" />
+    <NavigationProperty Name="aspnet_PersonalizationPerUser" Relationship="Self.FK__aspnet_Pe__PathI__2EDAF651" FromRole="aspnet_Paths" ToRole="aspnet_PersonalizationPerUser" />
+  </EntityType>
+  <EntityType Name="aspnet_PersonalizationAllUsers">
+    <Key>
+      <PropertyRef Name="PathId" />
+    </Key>
+    <Property Name="PathId" Type="Guid" Nullable="false" />
+    <Property Name="PageSettings" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="aspnet_Paths" Relationship="Self.FK__aspnet_Pe__PathI__2B0A656D" FromRole="aspnet_PersonalizationAllUsers" ToRole="aspnet_Paths" />
+  </EntityType>
+  <EntityType Name="aspnet_PersonalizationPerUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="PathId" Type="Guid" />
+    <Property Name="UserId" Type="Guid" />
+    <Property Name="PageSettings" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="aspnet_Paths" Relationship="Self.FK__aspnet_Pe__PathI__2EDAF651" FromRole="aspnet_PersonalizationPerUser" ToRole="aspnet_Paths" />
+    <NavigationProperty Name="aspnet_Users" Relationship="Self.FK__aspnet_Pe__UserI__2FCF1A8A" FromRole="aspnet_PersonalizationPerUser" ToRole="aspnet_Users" />
+  </EntityType>
+  <EntityType Name="aspnet_Profile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="PropertyNames" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PropertyValuesString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PropertyValuesBinary" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="aspnet_Users" Relationship="Self.FK__aspnet_Pr__UserI__08B54D69" FromRole="aspnet_Profile" ToRole="aspnet_Users" />
+  </EntityType>
+  <EntityType Name="aspnet_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+    <Property Name="RoleId" Type="Guid" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LoweredRoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="aspnet_Applications" Relationship="Self.FK__aspnet_Ro__Appli__123EB7A3" FromRole="aspnet_Roles" ToRole="aspnet_Applications" />
+    <NavigationProperty Name="aspnet_Users" Relationship="Self.aspnet_UsersInRoles" FromRole="aspnet_Roles" ToRole="aspnet_Users" />
+  </EntityType>
+  <EntityType Name="aspnet_SchemaVersions">
+    <Key>
+      <PropertyRef Name="Feature" />
+      <PropertyRef Name="CompatibleSchemaVersion" />
+    </Key>
+    <Property Name="Feature" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CompatibleSchemaVersion" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsCurrentVersion" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LoweredUserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MobileAlias" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
+    <Property Name="LastActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="aspnet_Applications" Relationship="Self.FK__aspnet_Us__Appli__6383C8BA" FromRole="aspnet_Users" ToRole="aspnet_Applications" />
+    <NavigationProperty Name="aspnet_Membership" Relationship="Self.FK__aspnet_Me__UserI__74AE54BC" FromRole="aspnet_Users" ToRole="aspnet_Membership" />
+    <NavigationProperty Name="aspnet_PersonalizationPerUser" Relationship="Self.FK__aspnet_Pe__UserI__2FCF1A8A" FromRole="aspnet_Users" ToRole="aspnet_PersonalizationPerUser" />
+    <NavigationProperty Name="aspnet_Profile" Relationship="Self.FK__aspnet_Pr__UserI__08B54D69" FromRole="aspnet_Users" ToRole="aspnet_Profile" />
+    <NavigationProperty Name="Musteri" Relationship="Self.FK_Musteri_aspnet_Users" FromRole="aspnet_Users" ToRole="Musteri" />
+    <NavigationProperty Name="aspnet_Roles" Relationship="Self.aspnet_UsersInRoles" FromRole="aspnet_Users" ToRole="aspnet_Roles" />
+  </EntityType>
+  <EntityType Name="aspnet_WebEvent_Events">
+    <Key>
+      <PropertyRef Name="EventId" />
+    </Key>
+    <Property Name="EventId" Type="String" MaxLength="32" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="EventTimeUtc" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EventTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EventType" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EventSequence" Type="Decimal" Precision="19" Scale="0" Nullable="false" />
+    <Property Name="EventOccurrence" Type="Decimal" Precision="19" Scale="0" Nullable="false" />
+    <Property Name="EventCode" Type="Int32" Nullable="false" />
+    <Property Name="EventDetailCode" Type="Int32" Nullable="false" />
+    <Property Name="Message" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+    <Property Name="ApplicationPath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="ApplicationVirtualPath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="MachineName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RequestUrl" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+    <Property Name="ExceptionType" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Kargo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SirketAdi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Adres" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Telefon" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="WebSite" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Satis" Relationship="Self.FK_Satis_Kargo" FromRole="Kargo" ToRole="Satis" />
+  </EntityType>
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Aciklama" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ResimID" Type="Int32" />
+    <NavigationProperty Name="Resim" Relationship="Self.FK_Kategori_Resim" FromRole="Kategori" ToRole="Resim" />
+    <NavigationProperty Name="OzellikTips" Relationship="Self.FK_OzellikTip_Kategori" FromRole="Kategori" ToRole="OzellikTip" />
+    <NavigationProperty Name="Uruns" Relationship="Self.FK_Urun_Kategori" FromRole="Kategori" ToRole="Urun" />
+  </EntityType>
+  <EntityType Name="Marka">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Aciklama" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ResimID" Type="Int32" />
+    <NavigationProperty Name="Resim" Relationship="Self.FK_Marka_Resim" FromRole="Marka" ToRole="Resim" />
+    <NavigationProperty Name="Uruns" Relationship="Self.FK_Urun_Marka" FromRole="Marka" ToRole="Urun" />
+  </EntityType>
+  <EntityType Name="Musteri">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Soyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Telefon" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="Self.FK_Musteri_aspnet_Users" FromRole="Musteri" ToRole="aspnet_Users" />
+    <NavigationProperty Name="MusteriAdres" Relationship="Self.FK_MusteriAdres_Musteri" FromRole="Musteri" ToRole="MusteriAdres" />
+    <NavigationProperty Name="Satis" Relationship="Self.FK_Satis_Musteri" FromRole="Musteri" ToRole="Satis" />
+    <Property Name="Tckn" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="Yorums" Relationship="eTicaretModel.FK_Yorum_Musteri" FromRole="Musteri" ToRole="Yorum" />
+  </EntityType>
+  <EntityType Name="MusteriAdre">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MusteriID" Type="Guid" Nullable="false" />
+    <Property Name="Adres" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Musteri" Relationship="Self.FK_MusteriAdres_Musteri" FromRole="MusteriAdres" ToRole="Musteri" />
+  </EntityType>
+  <EntityType Name="OzellikDeger">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Aciklama" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="OzellikTipID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="OzellikTip" Relationship="Self.FK_OzellikDeger_OzellikTip" FromRole="OzellikDeger" ToRole="OzellikTip" />
+    <NavigationProperty Name="UrunOzelliks" Relationship="Self.FK_UrunOzellik_OzellikDeger" FromRole="OzellikDeger" ToRole="UrunOzellik" />
+  </EntityType>
+  <EntityType Name="OzellikTip">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Aciklama" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="KategoriID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Kategori" Relationship="Self.FK_OzellikTip_Kategori" FromRole="OzellikTip" ToRole="Kategori" />
+    <NavigationProperty Name="OzellikDegers" Relationship="Self.FK_OzellikDeger_OzellikTip" FromRole="OzellikTip" ToRole="OzellikDeger" />
+    <NavigationProperty Name="UrunOzelliks" Relationship="Self.FK_UrunOzellik_OzellikTip" FromRole="OzellikTip" ToRole="UrunOzellik" />
+  </EntityType>
+  <EntityType Name="Resim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BuyukYol" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="OrtaYol" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="KucukYol" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Varsayilan" Type="Boolean" />
+    <Property Name="SiraNo" Type="Byte" />
+    <Property Name="UrunID" Type="Int32" />
+    <NavigationProperty Name="Kategoris" Relationship="Self.FK_Kategori_Resim" FromRole="Resim" ToRole="Kategori" />
+    <NavigationProperty Name="Markas" Relationship="Self.FK_Marka_Resim" FromRole="Resim" ToRole="Marka" />
+    <NavigationProperty Name="Urun" Relationship="Self.FK_Resim_Urun" FromRole="Resim" ToRole="Urun" />
+  </EntityType>
+  <EntityType Name="Sati">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MusteriID" Type="Guid" Nullable="false" />
+    <Property Name="SatisTarihi" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ToplamTutar" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="SepetteMi" Type="Boolean" Nullable="false" />
+    <Property Name="KargoID" Type="Int32" />
+    <Property Name="SiparisDurumID" Type="Int32" />
+    <Property Name="KargoTakipNo" Type="Int32" />
+    <NavigationProperty Name="Kargo" Relationship="Self.FK_Satis_Kargo" FromRole="Satis" ToRole="Kargo" />
+    <NavigationProperty Name="Musteri" Relationship="Self.FK_Satis_Musteri" FromRole="Satis" ToRole="Musteri" />
+    <NavigationProperty Name="SiparisDetays" Relationship="eTicaretModel.FK_SiparisDurum_Satis1" FromRole="Sati" ToRole="SiparisDetay" />
+    <NavigationProperty Name="SiparisDurum" Relationship="eTicaretModel.FK_Satis_SiparisDurum" FromRole="Sati" ToRole="SiparisDurum" />
+    <Property Name="OdemeDurumID" Type="Int32" />
+    <NavigationProperty Name="OdemeDurum" Relationship="eTicaretModel.FK_Satis_OdemeDurum" FromRole="Sati" ToRole="OdemeDurum" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Urun">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Aciklama" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="AlisFiyat" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="SatiFiyat" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="SonKullanmaTarihi" Type="DateTime" Precision="3" />
+    <Property Name="KategoriID" Type="Int32" />
+    <Property Name="MarkaID" Type="Int32" />
+    <NavigationProperty Name="Kategori" Relationship="Self.FK_Urun_Kategori" FromRole="Urun" ToRole="Kategori" />
+    <NavigationProperty Name="Marka" Relationship="Self.FK_Urun_Marka" FromRole="Urun" ToRole="Marka" />
+    <NavigationProperty Name="Resims" Relationship="Self.FK_Resim_Urun" FromRole="Urun" ToRole="Resim" />
+    <NavigationProperty Name="UrunOzelliks" Relationship="Self.FK_UrunOzellik_Urun" FromRole="Urun" ToRole="UrunOzellik" />
+    <NavigationProperty Name="SiparisDetays" Relationship="eTicaretModel.FK_SiparisDurum_Urun1" FromRole="Urun" ToRole="SiparisDetay" />
+    <NavigationProperty Name="Yorums" Relationship="eTicaretModel.FK_Yorum_Urun" FromRole="Urun" ToRole="Yorum" />
+  </EntityType>
+  <EntityType Name="UrunOzellik">
+    <Key>
+      <PropertyRef Name="UrunID" />
+      <PropertyRef Name="OzellikTipID" />
+      <PropertyRef Name="OzellikDegerID" />
+    </Key>
+    <Property Name="UrunID" Type="Int32" Nullable="false" />
+    <Property Name="OzellikTipID" Type="Int32" Nullable="false" />
+    <Property Name="OzellikDegerID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="OzellikDeger" Relationship="Self.FK_UrunOzellik_OzellikDeger" FromRole="UrunOzellik" ToRole="OzellikDeger" />
+    <NavigationProperty Name="OzellikTip" Relationship="Self.FK_UrunOzellik_OzellikTip" FromRole="UrunOzellik" ToRole="OzellikTip" />
+    <NavigationProperty Name="Urun" Relationship="Self.FK_UrunOzellik_Urun" FromRole="UrunOzellik" ToRole="Urun" />
+  </EntityType>
+  <Association Name="FK__aspnet_Me__Appli__73BA3083">
+    <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+    <End Role="aspnet_Membership" Type="Self.aspnet_Membership" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Membership">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Pa__Appli__25518C17">
+    <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+    <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Paths">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Ro__Appli__123EB7A3">
+    <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+    <End Role="aspnet_Roles" Type="Self.aspnet_Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Roles">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Us__Appli__6383C8BA">
+    <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+    <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Users">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Me__UserI__74AE54BC">
+    <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
+    <End Role="aspnet_Membership" Type="Self.aspnet_Membership" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="aspnet_Membership">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Pe__PathI__2B0A656D">
+    <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="1" />
+    <End Role="aspnet_PersonalizationAllUsers" Type="Self.aspnet_PersonalizationAllUsers" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Paths">
+        <PropertyRef Name="PathId" />
+      </Principal>
+      <Dependent Role="aspnet_PersonalizationAllUsers">
+        <PropertyRef Name="PathId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Pe__PathI__2EDAF651">
+    <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="0..1" />
+    <End Role="aspnet_PersonalizationPerUser" Type="Self.aspnet_PersonalizationPerUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Paths">
+        <PropertyRef Name="PathId" />
+      </Principal>
+      <Dependent Role="aspnet_PersonalizationPerUser">
+        <PropertyRef Name="PathId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Pe__UserI__2FCF1A8A">
+    <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="0..1" />
+    <End Role="aspnet_PersonalizationPerUser" Type="Self.aspnet_PersonalizationPerUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="aspnet_PersonalizationPerUser">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Pr__UserI__08B54D69">
+    <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
+    <End Role="aspnet_Profile" Type="Self.aspnet_Profile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="aspnet_Profile">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Musteri_aspnet_Users">
+    <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
+    <End Role="Musteri" Type="Self.Musteri" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Musteri">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Satis_Kargo">
+    <End Role="Kargo" Type="Self.Kargo" Multiplicity="1" />
+    <End Role="Satis" Type="Self.Sati" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kargo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Satis">
+        <PropertyRef Name="KargoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kategori_Resim">
+    <End Role="Resim" Type="Self.Resim" Multiplicity="0..1" />
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resim">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Kategori">
+        <PropertyRef Name="ResimID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OzellikTip_Kategori">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+    <End Role="OzellikTip" Type="Self.OzellikTip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OzellikTip">
+        <PropertyRef Name="KategoriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Urun_Kategori">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+    <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Urun">
+        <PropertyRef Name="KategoriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Marka_Resim">
+    <End Role="Resim" Type="Self.Resim" Multiplicity="0..1" />
+    <End Role="Marka" Type="Self.Marka" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resim">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Marka">
+        <PropertyRef Name="ResimID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Urun_Marka">
+    <End Role="Marka" Type="Self.Marka" Multiplicity="0..1" />
+    <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marka">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Urun">
+        <PropertyRef Name="MarkaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MusteriAdres_Musteri">
+    <End Role="Musteri" Type="Self.Musteri" Multiplicity="1" />
+    <End Role="MusteriAdres" Type="Self.MusteriAdre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Musteri">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MusteriAdres">
+        <PropertyRef Name="MusteriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Satis_Musteri">
+    <End Role="Musteri" Type="Self.Musteri" Multiplicity="1" />
+    <End Role="Satis" Type="Self.Sati" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Musteri">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Satis">
+        <PropertyRef Name="MusteriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OzellikDeger_OzellikTip">
+    <End Role="OzellikTip" Type="Self.OzellikTip" Multiplicity="1" />
+    <End Role="OzellikDeger" Type="Self.OzellikDeger" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OzellikTip">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OzellikDeger">
+        <PropertyRef Name="OzellikTipID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UrunOzellik_OzellikDeger">
+    <End Role="OzellikDeger" Type="Self.OzellikDeger" Multiplicity="1" />
+    <End Role="UrunOzellik" Type="Self.UrunOzellik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OzellikDeger">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UrunOzellik">
+        <PropertyRef Name="OzellikDegerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UrunOzellik_OzellikTip">
+    <End Role="OzellikTip" Type="Self.OzellikTip" Multiplicity="1" />
+    <End Role="UrunOzellik" Type="Self.UrunOzellik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OzellikTip">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UrunOzellik">
+        <PropertyRef Name="OzellikTipID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resim_Urun">
+    <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+    <End Role="Resim" Type="Self.Resim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urun">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Resim">
+        <PropertyRef Name="UrunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UrunOzellik_Urun">
+    <End Role="Urun" Type="Self.Urun" Multiplicity="1" />
+    <End Role="UrunOzellik" Type="Self.UrunOzellik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urun">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UrunOzellik">
+        <PropertyRef Name="UrunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="aspnet_UsersInRoles">
+    <End Role="aspnet_Roles" Type="Self.aspnet_Roles" Multiplicity="*" />
+    <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="eTicaretEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="aspnet_Applications" EntityType="Self.aspnet_Applications" />
+    <EntitySet Name="aspnet_Membership" EntityType="Self.aspnet_Membership" />
+    <EntitySet Name="aspnet_Paths" EntityType="Self.aspnet_Paths" />
+    <EntitySet Name="aspnet_PersonalizationAllUsers" EntityType="Self.aspnet_PersonalizationAllUsers" />
+    <EntitySet Name="aspnet_PersonalizationPerUser" EntityType="Self.aspnet_PersonalizationPerUser" />
+    <EntitySet Name="aspnet_Profile" EntityType="Self.aspnet_Profile" />
+    <EntitySet Name="aspnet_Roles" EntityType="Self.aspnet_Roles" />
+    <EntitySet Name="aspnet_SchemaVersions" EntityType="Self.aspnet_SchemaVersions" />
+    <EntitySet Name="aspnet_Users" EntityType="Self.aspnet_Users" />
+    <EntitySet Name="aspnet_WebEvent_Events" EntityType="Self.aspnet_WebEvent_Events" />
+    <EntitySet Name="Kargoes" EntityType="Self.Kargo" />
+    <EntitySet Name="Kategoris" EntityType="Self.Kategori" />
+    <EntitySet Name="Markas" EntityType="Self.Marka" />
+    <EntitySet Name="Musteris" EntityType="Self.Musteri" />
+    <EntitySet Name="MusteriAdres" EntityType="Self.MusteriAdre" />
+    <EntitySet Name="OzellikDegers" EntityType="Self.OzellikDeger" />
+    <EntitySet Name="OzellikTips" EntityType="Self.OzellikTip" />
+    <EntitySet Name="Resims" EntityType="Self.Resim" />
+    <EntitySet Name="Satis" EntityType="Self.Sati" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Uruns" EntityType="Self.Urun" />
+    <EntitySet Name="UrunOzelliks" EntityType="Self.UrunOzellik" />
+    <AssociationSet Name="FK__aspnet_Me__Appli__73BA3083" Association="Self.FK__aspnet_Me__Appli__73BA3083">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Pa__Appli__25518C17" Association="Self.FK__aspnet_Pa__Appli__25518C17">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Ro__Appli__123EB7A3" Association="Self.FK__aspnet_Ro__Appli__123EB7A3">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Us__Appli__6383C8BA" Association="Self.FK__aspnet_Us__Appli__6383C8BA">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Me__UserI__74AE54BC" Association="Self.FK__aspnet_Me__UserI__74AE54BC">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Pe__PathI__2B0A656D" Association="Self.FK__aspnet_Pe__PathI__2B0A656D">
+      <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+      <End Role="aspnet_PersonalizationAllUsers" EntitySet="aspnet_PersonalizationAllUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Pe__PathI__2EDAF651" Association="Self.FK__aspnet_Pe__PathI__2EDAF651">
+      <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+      <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Pe__UserI__2FCF1A8A" Association="Self.FK__aspnet_Pe__UserI__2FCF1A8A">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Pr__UserI__08B54D69" Association="Self.FK__aspnet_Pr__UserI__08B54D69">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Musteri_aspnet_Users" Association="Self.FK_Musteri_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="Musteri" EntitySet="Musteris" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Satis_Kargo" Association="Self.FK_Satis_Kargo">
+      <End Role="Kargo" EntitySet="Kargoes" />
+      <End Role="Satis" EntitySet="Satis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kategori_Resim" Association="Self.FK_Kategori_Resim">
+      <End Role="Resim" EntitySet="Resims" />
+      <End Role="Kategori" EntitySet="Kategoris" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OzellikTip_Kategori" Association="Self.FK_OzellikTip_Kategori">
+      <End Role="Kategori" EntitySet="Kategoris" />
+      <End Role="OzellikTip" EntitySet="OzellikTips" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Urun_Kategori" Association="Self.FK_Urun_Kategori">
+      <End Role="Kategori" EntitySet="Kategoris" />
+      <End Role="Urun" EntitySet="Uruns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Marka_Resim" Association="Self.FK_Marka_Resim">
+      <End Role="Resim" EntitySet="Resims" />
+      <End Role="Marka" EntitySet="Markas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Urun_Marka" Association="Self.FK_Urun_Marka">
+      <End Role="Marka" EntitySet="Markas" />
+      <End Role="Urun" EntitySet="Uruns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MusteriAdres_Musteri" Association="Self.FK_MusteriAdres_Musteri">
+      <End Role="Musteri" EntitySet="Musteris" />
+      <End Role="MusteriAdres" EntitySet="MusteriAdres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Satis_Musteri" Association="Self.FK_Satis_Musteri">
+      <End Role="Musteri" EntitySet="Musteris" />
+      <End Role="Satis" EntitySet="Satis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OzellikDeger_OzellikTip" Association="Self.FK_OzellikDeger_OzellikTip">
+      <End Role="OzellikTip" EntitySet="OzellikTips" />
+      <End Role="OzellikDeger" EntitySet="OzellikDegers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UrunOzellik_OzellikDeger" Association="Self.FK_UrunOzellik_OzellikDeger">
+      <End Role="OzellikDeger" EntitySet="OzellikDegers" />
+      <End Role="UrunOzellik" EntitySet="UrunOzelliks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UrunOzellik_OzellikTip" Association="Self.FK_UrunOzellik_OzellikTip">
+      <End Role="OzellikTip" EntitySet="OzellikTips" />
+      <End Role="UrunOzellik" EntitySet="UrunOzelliks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resim_Urun" Association="Self.FK_Resim_Urun">
+      <End Role="Urun" EntitySet="Uruns" />
+      <End Role="Resim" EntitySet="Resims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UrunOzellik_Urun" Association="Self.FK_UrunOzellik_Urun">
+      <End Role="Urun" EntitySet="Uruns" />
+      <End Role="UrunOzellik" EntitySet="UrunOzelliks" />
+    </AssociationSet>
+    <AssociationSet Name="aspnet_UsersInRoles" Association="Self.aspnet_UsersInRoles">
+      <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+    </AssociationSet>
+    <EntitySet Name="SiparisDetays" EntityType="eTicaretModel.SiparisDetay" />
+    <AssociationSet Name="FK_SiparisDurum_Satis1" Association="eTicaretModel.FK_SiparisDurum_Satis1">
+      <End Role="Sati" EntitySet="Satis" />
+      <End Role="SiparisDetay" EntitySet="SiparisDetays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SiparisDurum_Urun1" Association="eTicaretModel.FK_SiparisDurum_Urun1">
+      <End Role="Urun" EntitySet="Uruns" />
+      <End Role="SiparisDetay" EntitySet="SiparisDetays" />
+    </AssociationSet>
+    <EntitySet Name="SiparisDurums" EntityType="eTicaretModel.SiparisDurum" />
+    <AssociationSet Name="FK_Satis_SiparisDurum" Association="eTicaretModel.FK_Satis_SiparisDurum">
+      <End Role="SiparisDurum" EntitySet="SiparisDurums" />
+      <End Role="Sati" EntitySet="Satis" />
+    </AssociationSet>
+    <EntitySet Name="OdemeDurums" EntityType="eTicaretModel.OdemeDurum" />
+    <EntitySet Name="Yorums" EntityType="eTicaretModel.Yorum" />
+    <AssociationSet Name="FK_Yorum_Musteri" Association="eTicaretModel.FK_Yorum_Musteri">
+      <End Role="Musteri" EntitySet="Musteris" />
+      <End Role="Yorum" EntitySet="Yorums" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Satis_OdemeDurum" Association="eTicaretModel.FK_Satis_OdemeDurum">
+      <End Role="OdemeDurum" EntitySet="OdemeDurums" />
+      <End Role="Sati" EntitySet="Satis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Yorum_Urun" Association="eTicaretModel.FK_Yorum_Urun">
+      <End Role="Urun" EntitySet="Uruns" />
+      <End Role="Yorum" EntitySet="Yorums" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="SiparisDetay">
+    <Key>
+      <PropertyRef Name="SatisID" />
+      <PropertyRef Name="UrunID" />
+    </Key>
+    <Property Name="SatisID" Type="Int32" Nullable="false" />
+    <Property Name="UrunID" Type="Int32" Nullable="false" />
+    <Property Name="Adet" Type="Int32" Nullable="false" />
+    <Property Name="Fiyat" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="İndirim" Type="Double" />
+    <NavigationProperty Name="Sati" Relationship="eTicaretModel.FK_SiparisDurum_Satis1" FromRole="SiparisDetay" ToRole="Sati" />
+    <NavigationProperty Name="Urun" Relationship="eTicaretModel.FK_SiparisDurum_Urun1" FromRole="SiparisDetay" ToRole="Urun" />
+  </EntityType>
+  <Association Name="FK_SiparisDurum_Satis1">
+    <End Type="eTicaretModel.Sati" Role="Sati" Multiplicity="1" />
+    <End Type="eTicaretModel.SiparisDetay" Role="SiparisDetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sati">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SiparisDetay">
+        <PropertyRef Name="SatisID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SiparisDurum_Urun1">
+    <End Type="eTicaretModel.Urun" Role="Urun" Multiplicity="1" />
+    <End Type="eTicaretModel.SiparisDetay" Role="SiparisDetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urun">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SiparisDetay">
+        <PropertyRef Name="UrunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SiparisDurum">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Aciklama" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Satis" Relationship="eTicaretModel.FK_Satis_SiparisDurum" FromRole="SiparisDurum" ToRole="Sati" />
+  </EntityType>
+  <Association Name="FK_Satis_SiparisDurum">
+    <End Type="eTicaretModel.SiparisDurum" Role="SiparisDurum" Multiplicity="0..1" />
+    <End Type="eTicaretModel.Sati" Role="Sati" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SiparisDurum">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sati">
+        <PropertyRef Name="SiparisDurumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="OdemeDurum">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Aciklama" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Satis" Relationship="eTicaretModel.FK_Satis_OdemeDurum" FromRole="OdemeDurum" ToRole="Sati" />
+  </EntityType>
+  <EntityType Name="Yorum">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UrunID" Type="Int32" />
+    <Property Name="MusteriID" Type="Guid" />
+    <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Yorum1" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Musteri" Relationship="eTicaretModel.FK_Yorum_Musteri" FromRole="Yorum" ToRole="Musteri" />
+    <NavigationProperty Name="Urun" Relationship="eTicaretModel.FK_Yorum_Urun" FromRole="Yorum" ToRole="Urun" />
+  </EntityType>
+  <Association Name="FK_Yorum_Musteri">
+    <End Type="eTicaretModel.Musteri" Role="Musteri" Multiplicity="0..1" />
+    <End Type="eTicaretModel.Yorum" Role="Yorum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Musteri">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Yorum">
+        <PropertyRef Name="MusteriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Satis_OdemeDurum">
+    <End Type="eTicaretModel.OdemeDurum" Role="OdemeDurum" Multiplicity="0..1" />
+    <End Type="eTicaretModel.Sati" Role="Sati" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OdemeDurum">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sati">
+        <PropertyRef Name="OdemeDurumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Yorum_Urun">
+    <End Type="eTicaretModel.Urun" Role="Urun" Multiplicity="0..1" />
+    <End Type="eTicaretModel.Yorum" Role="Yorum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urun">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Yorum">
+        <PropertyRef Name="UrunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

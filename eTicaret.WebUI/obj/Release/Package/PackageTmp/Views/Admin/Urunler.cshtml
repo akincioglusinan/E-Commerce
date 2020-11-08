@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Urunler";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@model IEnumerable<eTicaret.WebUI.Models.Urun>
+    <br />
+<section class="panel">
+    <header class="panel-heading">
+        Ürünler
+    </header>
+    <div class="panel-body">
+        <div class="adv-table editable-table ">
+            <div class="clearfix">
+                <div class="btn-group">
+                    <a href="/Admin/UrunEkle" class="btn btn-success">Yeni Ürün</a>
+                </div>
+            </div> 
+            <br />
+            <div class="space15"></div>
+            <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                <thead>
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Açıklama</th>
+                        <th>Alış Fiyat</th>
+                        <th>Satış Fiyat</th>
+                        <th>Kategori</th>
+                        <th>Marka</th>
+                        <th>Resim Ekle</th>
+                        <th>Güncelle</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var urun in Model)
+                    {
+                    <tr>
+                        <td>@urun.Adi</td>
+                        <td>@urun.Aciklama</td>
+                        <td>@urun.AlisFiyat</td>
+                        <td>@urun.SatiFiyat</td>
+                        <td>@urun.Kategori.Adi</td>
+                        <td>@urun.Marka.Adi</td>
+                        <td>
+                            <a href="/Admin/UrunResimEkle/@urun.Id">
+                                <i class="icon-plus"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="edit" href="/Admin/UrunGuncelle/@urun.Id"><i class="icon-pencil"></i></a>
+                        </td>
+                        <td>
+                            <a class="delete" href="/Admin/UrunGuncelle/@urun.Id"><i class="icon-trash"></i></a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "İletişim";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>iletişim</h2>
+                <div class="google-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3013.30401301949!2d29.113400328710643!3d40.95291843526825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac6f4873704f9%3A0x3a7707776eabbc8c!2zS8O8w6fDvGt5YWzEsSwgWWF6IFl1cmR1IFNrLiBObzo0LCAzNDg0MCBNYWx0ZXBlL8Swc3RhbmJ1bCwgVMO8cmtpeWU!5e0!3m2!1str!2sus!4v1585742112609!5m2!1str!2sus" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                </div>
+
+                <div class="contact-info">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <ul>
+                                <li><span class="location">Küçükyalı Maltepe/İstanbul</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <ul>
+                                <li><span class="mail"><a href="sinanakincioglu@gmail.com">sinanakincioglu@gmail.com</a></span></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <ul>
+                                <li><span class="phone">(536) 307 05 13</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="site-title">
+                    <div class="site-inside">
+                        <span>Bize Yazın</span>
+                    </div>
+                </div>
+
+                <div class="the-form">
+                    <form id="contact_form">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p>İsim</p>
+                                <input type="text" name="contact-name" class="the-line">
+                            </div>
+                            <div class="col-md-4">
+                                <p>E-mail</p>
+                                <input type="text" name="contact-email" class="the-line">
+                            </div>
+                            <div class="col-md-4">
+                                <p>Website</p>
+                                <input type="text" name="contact-website" class="the-line">
+                            </div>
+                        </div>
+                        <p>Açıklama</p>
+                        <textarea name="contact-message" class="the-area"></textarea>
+                        <input type="submit" id="form-send" value="Gönder" class="button-4">
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="main-sidebar">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-6">
+                            <div class="widget">
+                                <div class="widget-title">Category</div>
+                                <ul class="widget-category">
+                                    <li><a href="#">Dress</a></li>
+                                    <li><a href="#">Coat</a></li>
+                                    <li><a href="#">Winter collection</a></li>
+                                    <li><a href="#">Models</a></li>
+                                    <li><a href="#">Boots</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

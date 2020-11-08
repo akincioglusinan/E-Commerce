@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Ürün Ekle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<br /><br /><br /><br />
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Ürün Ekle
+            </header>
+            <div class="panel-body">
+                <form role="form" action="/Admin/UrunEkle" method="post" enctype="multipart/form-data"  class="form-horizontal tasi-form">
+                    <div class="form-group has-success">
+                        <label class="col-lg-2 control-label">Ürün Adı</label>
+                        <div class="col-lg-10">
+                            <input type="text" placeholder="" id="f-name" class="form-control" name="Adi">
+                            <p class="help-block">Successfully done</p>
+                        </div>
+                    </div>
+                    <div class="form-group has-error">
+                        <label class="col-lg-2 control-label" enctype="multipart/form-data">Açıklama</label>
+                        <div class="col-lg-10">
+                            <input type="text" placeholder="" id="l-name" class="form-control" name="Aciklama">
+                            <p class="help-block">Aha you gave a wrong info</p>
+                        </div>
+                    </div>
+                    <div class="form-group has-warning">
+                        <label class="col-lg-2 control-label">Alış Fiyatı</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="spinner-input form-control" name="AlisFiyat">
+                            <p class="help-block">Something went wrong</p>
+                        </div>
+                    </div>
+                    <div class="form-group has-warning">
+                        <label class="col-lg-2 control-label">Satış Fiyatı</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="spinner-input form-control" name="SatiFiyat">
+                            <p class="help-block">Something went wrong</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Kategori:</label>
+                        <div class="col-lg-10">
+                            <select class="form-control m-bot15" name="KategoriID">
+                                @foreach (var kategori in ViewBag.Kategoriler)
+                                {
+                                    <option value="@kategori.Id">@kategori.Adi</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Marka:</label>
+                        <div class="col-lg-10">
+                            <select class="form-control m-bot15" name="MarkaID">
+                                @foreach (var marka in ViewBag.Markalar)
+                                {
+                                    <option value="@marka.Id">@marka.Adi</option>
+                                }
+                            </select>
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button class="btn btn-danger" type="submit">Kaydet</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>
+

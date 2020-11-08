@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "TamamlananSiparisler";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using eTicaret.WebUI.App_Classes
+@model IEnumerable<ViewModel>
+
+<section id="container" class="">
+    <section class="wrapper">
+        <section class="panel">
+            <header class="panel-heading">
+                Kargoya Verilen Siparişler
+            </header>
+            <div class="panel-body">
+                <div class="adv-table">
+                    <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+                        <thead>
+                            <tr>
+                                <th>Tarih</th>
+                                <th>Müşteri</th>
+                                <th class="hidden-phone">Id</th>
+                                <th class="hidden-phone">Tutar</th>
+                                <th class="hidden-phone">Ödeme Durum</th>
+                                <th class="hidden-phone">Kargo Şirketi</th>
+                                <th class="hidden-phone">Kargo Takip No</th>
+                                <th class="hidden"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                int satid = 0;
+                                foreach (var db in Model)
+                                {
+                                    if (satid != db.satis.Id && db.satis.SiparisDurumID == 4 && db.satis.KargoTakipNo != null && db.satis.KargoID != null && db.satis.OdemeDurumID == 1 || db.satis.SiparisDurumID == 5)
+                                    {
+
+                                        <tr class="gradeA">
+                                            <td>@db.satis.SatisTarihi</td>
+                                            <td>
+                                                @db.ms.Adi @db.ms.Soyadi<br />
+                                                TCKNo: @db.ms.Tckn - 
+                                                TEL: @db.ms.Telefon
+                                            </td>
+                                            <td class="hidden-phone">@db.satis.Id</td>
+                                            <td class="center hidden-phone">@db.satis.ToplamTutar.ToString("0.##") ₺</td>
+                                            <td class="hidden">
+                                                @foreach (var dbu in Model)
+                                                {
+                                                    if (db.satis.Id == dbu.sdetay.SatisID && dbu.urunu.Id == dbu.sdetay.UrunID && db.satis.MusteriID == dbu.ms.Id)
+                                                    {
+                                                        <p><b>Ürün Adı: @dbu.urunu.Adi <br />Fiyatı : @dbu.sdetay.Fiyat ₺</b></p>
+                                                    }
+                                                }
+                                                <p><b>E-Mail : @db.ms.EMail</b></p>
+                                                <p><b>Adres :@db.satis.MusteriAdre.Adres</b></p>
+                                            </td>
+                                            <form action="/Siparis/TamamlananSiparisler" method="post">
+                                                <td class="hidden-phone">
+
+                                                    <p><b>@db.satis.OdemeDurum.Adi</b></p>
+                                                </td>
+                                                <td class="hidden-phone">
+                                                    @if (db.satis.KargoID != null)
+                                                    {
+                                                        <p><b>@db.satis.Kargo.SirketAdi</b></p>
+                                                    }
+                                                </td>
+                                                <td class="hidden-phone">
+                                                    @if (db.satis.KargoTakipNo != null)
+                                                    {
+                                                        <p>@db.satis.KargoTakipNo</p>
+                                                    }
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    }
+                                    satid = db.satis.Id;
+                                }
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+</section>
+

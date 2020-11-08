@@ -1,0 +1,57 @@
+﻿
+@model IEnumerable<eTicaret.WebUI.Models.Urun>
+
+<script src="~/Content/Zeon/js/jquery-1.10.0.min.js"></script>
+<script>
+    $(document).ready(function myfunction() {
+        $(".sepeteAt").click(function myfunction() {
+            var uid = $(this).attr("name");
+            $.ajax({
+                type: "GET",
+                url: "/Home/SepeteEkle",
+                data: { id: uid },
+                success: function myfunction() {
+                    $.ajax({
+                        type: "GET",
+                        url: "/home/MiniSepetwidget",
+                        success: function VeriGetir(veri) {
+                            $(".cart-all").html("");
+                            $(".cart-all").html(veri);
+
+                        }
+                    })
+                },
+                error: function myfunction() {
+                    alert("Ürün sepete eklenemedi!!");
+                }
+            });
+        });
+    });
+</script>
+
+@if (Model != null)
+{
+    foreach (var urn in Model)
+    {
+        <div class="col-md-4 col-xs-6">
+            <div class="product">
+                <div class="product-cover">
+                    <div class="product-cover-hover"><span><a href="/Home/UrunDetay/@urn.Adi">Göster</a></span></div>
+                    @if (urn.Resims != null)
+                    {
+                        <img src="@urn.Resims.FirstOrDefault(x => x.Varsayilan == false).OrtaYol" alt="product name" />
+                    }
+                </div>
+                <div class="product-details">
+                    <h1><a href="/home/urundetay/@urn.Adi">@urn.Adi</a></h1>
+                    <div class="product-price">
+                        <a class="sepeteAt" name="@urn.Id">
+                            <i class="icon-257" title="add to cart"></i>
+                        </a>
+                        @urn.SatiFiyat.ToString("0.##") ₺
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

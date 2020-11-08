@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Giriş Yap";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+
+@section head{
+    <style>
+        #hata{
+            color:red;
+            font-size:16px;
+        }
+    </style>
+    }
+
+<div class="content">
+    <div class="container">
+        <div class="site-title"><div class="site-inside"><span>Giriş / Kayıt</span></div></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="forms-separation">
+                    <div class="login-form-box">
+                        <form action="/Uye/GirisYap" class="login-form" method="post">
+                            <h3>Giriş</h3>
+                            <p>Giriş Yapmak için Email Adresinizi Giriniz</p>
+                            <input type="text" name="Email" class="login-line">
+                            <p>Parola</p>
+                            <input type="password" name="Parola" class="login-line">
+                            <input type="checkbox" name="Hatirla"> Beni Hatırla
+                            <input type="submit" value="Giriş Yap" class="button-6">
+                            <a href="/Uye/ParolamiUnuttum" class="lost-password">Parolamı unuttum</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <form action="/Kullanici/Ekle" method="post" role="form" class="register-form">
+                    <h3>Kayıt</h3>
+                    <p>Kullanıcı Adı</p>
+                    <input type="text" name="KullaniciAdi" class="input-line">
+                    <p>E-mail</p>
+                    <input type="text" name="Email" class="input-line">
+                    <p>Gizli Soru</p>
+                    <input type="text" name="GizliSoru" class="input-line" placeholder="Gizli soru giriniz">
+                    <p>Gizli Cevap</p>
+                    <input type="text" name="GizliCevap" class="input-line" placeholder="Gizli cevap giriniz">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>Parola</p>
+                            <input type="password" name="Parola" class="input-line" placeholder="Parola giriniz" min="3">
+                        </div>
+                        @*<div class="col-md-6">
+                    <p>Parolayı Tekrarla</p>
+                    <input type="password" name="Parola" class="input-line" placeholder="Parolayı tekrar giriniz">
+                </div>*@
+                    </div>
+                    <input type="submit" value="Kayıt Ol" class="button-6">
+
+                </form>
+                <span id="hata">@ViewBag.Mesaj</span>
+            </div>
+        </div>
+    </div>
+</div>
+

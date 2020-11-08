@@ -1,0 +1,161 @@
+﻿
+@{
+    ViewBag.Title = @Model.Adi + "Zeon Ticaret ";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+@model eTicaret.WebUI.Models.Urun
+@section head{
+    <script src="~/Content/Zeon/js/jquery-1.10.0.min.js"></script>
+    <script>
+        $(document).ready(function myfunction() {
+            $(".sepeteAt").click(function myfunction() {
+                var uid = $(this).attr("name");
+                $.ajax({
+                    type: "GET",
+                    url: "/Home/SepeteEkle",
+                    data: { id: uid },
+                    success: function myfunction() {
+                        $.ajax({
+                            type: "GET",
+                            url: "/home/MiniSepetwidget",
+                            success: function VeriGetir(veri) {
+                                $(".cart-all").html("");
+                                $(".cart-all").html(veri);
+                                alert("Ürün sepete eklendi");
+                            }
+                        });
+                    },
+                    error: function myfunction() {
+                        alert("Ürün sepete eklenemedi!!");
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<div class="modal fade" id="write-review" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-review">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Write a review</h3>
+            <form action="/Home/YorumKaydet" method="post">
+                <input class="input-line" name="urid" type="hidden" value="@Model.Id">
+                <p>Başlık</p>
+                <input class="input-line" name="yadi" type="text">
+                <p>Yorumunuz</p>
+                <textarea class="text-area" name="yorum"></textarea>
+                <button type="submit" class="button-6">Gönder</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="product-one">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="the-slider product-big-image" data-tesla-plugin="slider" data-tesla-item=".slide" data-tesla-next=".product-image-arrows-right" data-tesla-prev=".product-image-arrows-left" data-tesla-container=".slide-wrapper">
+                    <ul class="product-image-arrows">
+                        <li class="product-image-arrows-left"><i class="icon-517" title="left"></i></li>
+                        <li class="product-image-arrows-right"><i class="icon-501" title="right"></i></li>
+                    </ul>
+                    <ul class="slide-wrapper">
+                        @foreach (var item in Model.Resims)
+                        {
+                            <li class="slide"><img src="@item.BuyukYol" alt="@Model.Adi" /></li>
+                        }
+
+                    </ul>
+                    <div class="row">
+                        <ul class="the-bullets-dots" data-tesla-plugin="bullets">
+                            @foreach (var item in Model.Resims)
+                            {
+                                <li>
+                                    <div class="col-md-2 col-xs-2"><img src="@item.OrtaYol" alt="@Model.Adi" /></div>
+                                </li>
+                            }
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2>@Model.Adi</h2>
+                @foreach (var tip in ViewBag.Ozellikler)
+                {
+                    <div class="sort-dropdown">
+                        <span>@tip.Key <i class="icon-515" title="515"></i></span>
+                        <ul>
+                            @foreach (var deger in tip.Value)
+                            {
+                                //Value HomeController'daki dictionary List<OzellikDeger>, koleksiyon tip eklemezsen foreach içinde gezemezsin.
+                                <li><a href="#">@deger.Adi</a></li>
+                            }
+
+                        </ul>
+                    </div>
+                }
+
+
+                <div class="clear"></div>
+                <div class="quantity">
+                    <input type="button" value="-" class="minus">
+                    <input type="number" step="1" min="1" name="Adet" value="1" title="Qty" class="input-text qty text">
+                    <input type="button" value="+" class="plus">
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="product-price">Fiyat : @Model.SatiFiyat.ToString() ₺</div>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="button-2 sepeteAt" name="@Model.Id">Sepete Ekle</a>
+                    </div>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#description" data-toggle="tab">Açıklama</a></li>
+                    <li class=""><a href="#reviews" data-toggle="tab">Yorumlar</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="description">
+                        <p>@Model.Aciklama</p>
+                        <ul class="social-share">
+                            <li><span>Paylaş</span></li>
+                            <li><a href="#"><i class="icon-160" title="161"></i></a></li>
+                            <li><a href="#"><i class="icon-138" title="161"></i></a></li>
+                            <li><a href="#"><i class="icon-106" title="161"></i></a></li>
+                            <li><a href="#"><i class="icon-169" title="161"></i></a></li>
+                            <li><a href="#"><i class="icon-163" title="161"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="reviews">
+                        @if (ViewBag.Yorumlar != null)
+                        {
+                            foreach (var yorum in ViewBag.Yorumlar)
+                            {
+
+                                <div class="product-review">
+                                    <div class="product-review-avatar">
+                                        <p>İsim  :</p>
+                                        <p>Yorum :</p>
+                                    </div>
+                                    <div class="product-review-author"> @yorum.Musteri.Adi - @yorum.Musteri.Soyadi<span></span></div>
+                                    <p>@yorum.Yorum1</p>
+                                </div>
+
+                            }
+                        }
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a href="#" class="button-6" data-toggle="modal" data-target="#write-review">Yorum Yaz</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

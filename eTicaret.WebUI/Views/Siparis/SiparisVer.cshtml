@@ -1,0 +1,202 @@
+﻿
+@{
+    ViewBag.Title = "SiparisVer";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+@model eTicaret.WebUI.Models.aspnet_Membership
+
+<script src="~/Content/Zeon/js/jquery-1.10.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#aadres").change(function myfunction() {
+            var kId = $(this).find("option:selected").attr("titleadr");//seçili option'u bul attribute'larından title'ı getir.
+            $.ajax({
+                type: "GET",
+                url: "/Uye/AdresGetirWidget",
+                data: { id: kId },
+                success: function myfunction(veri) {
+                    $(".adr").html('');
+                    $(".adr").html(veri);
+                },
+                error: function myfunction() {
+                    alert("Lütfen bir adres seçiniz...");
+                }
+            });
+        });
+
+        $(".SiparisVer").click(function () {
+
+            document.forms["form1"].submit();
+            document.forms["form2"].submit();
+            //document.forms["form3"].submit();
+        });
+
+    });
+    
+        
+    //    );
+    //function checkforblank() {
+
+    //    var location = document.getElementById('adres');
+    //    var invalid = location.value == "Please Select";
+
+    //    if (invalid) {
+    //        alert('Please enter first name');
+    //        location.className = 'error';
+    //    }
+    //    else {
+    //        location.className = '';
+    //    }
+
+    //    return !invalid;
+    //}
+
+</script>
+
+<div class="content">
+    <div class="container">
+        <div class="site-title"><div class="site-inside"><span>Sipariş Sayfası</span></div></div>
+        <div class="row">
+            @if (User.Identity.IsAuthenticated == false)
+            {
+                <div class="col-md-6">
+                    <div class="forms-separation">
+                        <div class="login-form-box">
+                            <form action="/Uye/GirisYap" class="login-form" name="form" method="post">
+                                <h3>Giriş</h3>
+                                <p>Giriş Yapmak için Email Adresinizi Giriniz</p>
+                                <input type="text" name="Email" class="login-line">
+                                <p>Parola</p>
+                                <input type="password" name="Parola" class="login-line">
+                                <input type="checkbox" name="Hatirla"> Beni Hatırla
+                                <input type="submit" value="Giriş Yap" class="button-6">
+                                <a href="/Uye/ParolamiUnuttum" class="lost-password">Parolamı unuttum</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="col-md-6">
+                <form action="/Uye/HesapDuzenle" method="post" class="register-form" role="form" name="form1">
+                    <div class="order-title">İletişim Bilgileri</div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="hidden" class="form-control" id="email" name="Id" value="@Model.UserId">
+                            <input type="hidden" class="form-control" id="f-name" name="KullaniciAdi" value="@User.Identity.Name">
+                            <p>Ad <span class="neccesary">*</span></p>
+                            <input type="text" name="Adi" class="input-line" value="@ViewBag.M.Adi" required>
+                        </div>
+                        <div class="col-md-6">
+                            <p>Soyad <span class="neccesary">*</span></p>
+                            <input type="text" name="Soyadi" class="input-line" value="@ViewBag.M.Soyadi" required>
+                        </div>
+                        <div class="col-md-6">
+                            <p>TC Kimlik No <span class="neccesary">*</span></p>
+                            <input type="text" name="Tckn" class="input-line" maxlength="11" value="@ViewBag.M.Tckn" required>
+                        </div>
+                        <div class="col-md-6">
+                            <p>E-Mail<span class="neccesary">*</span></p>
+                            <input type="text" class="input-line" id="email" name="EMail" value="@Model.Email" required>
+                        </div>
+
+                    </div>
+                    <p>Telefon <span class="neccesary">*</span></p>
+                    <input type="tel" name="Telefon" class="input-line" maxlength="15" value="@ViewBag.M.Telefon" required>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <div class="order-title">Adres Bilgileri</div>
+
+                @if (ViewBag.MAdres.Count != 0)
+                {
+
+                    <p>Adres Seç <span class="neccesary">*</span></p>
+                    <div class="col-lg-10">
+                        <form action="#" id="myform" method="post" class="form-horizontal clientType" name="form3">
+                            @*@{
+                                    Html.RenderAction("AdresSiparis", "Siparis");
+                                }*@
+                            <select id="aadres" class="form-control m-bot15 " name="aadres" onchange="checkforblank()">
+                                <option>Lütfen Adres Seçiniz!</option>
+                                @foreach (var adres in ViewBag.MAdres)
+                                {
+                                    <option value="@adres.Id" titleadr="@adres.Id">@adres.Adi</option>
+                                }
+                            </select>
+                        </form>
+                    </div>
+                    <div class="adr">
+                        <text></text>
+                    </div>
+                    <div class="button-group right">
+                        <br />
+                        <a href="/Uye/AdresEkle" class="button-6">Yeni Adres Ekle</a>
+                    </div>
+
+                }
+                else
+                {
+                    <form action="/Uye/AdresEkle" method="post" class="form-horizontal" name="form2" role="form">
+                        <input type="hidden" class="form-control" name="MusteriID" id="f-name" value="@Model.UserId">
+                        <p>Adres Adı <span class="neccesary">*</span></p>
+                        <input type="text" name="Adi" class="input-line" required>
+                        <p>Adres <span class="neccesary">*</span></p>
+                        <textarea name="Adres" type="text" rows="10" cols="30" class="input-line" required></textarea>
+                    </form>
+                }
+
+            </div>
+            <div class="clear"></div>
+
+            <div class="col-md-12">
+                <div class="order-title">Sipariş Detayı</div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <ul class="checkout-info">
+                            <li class="checkout-info-1">Ürünler</li>
+                            <li class="checkout-info-2">Toplam</li>
+                        </ul>
+
+                        <div class="checkout-info-box">
+                            @if (ViewBag.Sepet != null)
+                            {
+                                foreach (var item in ViewBag.Sepet.Urunler)
+                                {
+                                    <ul class="checkout-product">
+                                        <li class="checkout-product-1">@item.Urun.Adi</li>
+                                        <li class="checkout-product-2">@item.Urun.SatiFiyat.ToString("0.##") ₺</li>
+                                    </ul>
+                                }
+
+
+                                <!-- CART DETAILS -->
+                                <ul class="checkout-product o-last">
+                                    <li class="checkout-product-1">Ara Toplam</li>
+                                    <li class="checkout-product-2">0 ₺</li>
+                                </ul>
+                                <ul class="checkout-product o-last">
+                                    <li class="checkout-product-1">Kargo</li>
+                                    <li class="checkout-product-2">0 ₺</li>
+                                </ul>
+                                <ul class="checkout-product last">
+                                    <li class="checkout-product-1">Toplam Tutar</li>
+                                    <li class="checkout-product-2">@ViewBag.Sepet.ToplamTutar.ToString("0.##") ₺</li>
+                                </ul>
+                            }
+                            <!-- CART DETAILS -->
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <ul class="payment-method">
+                            <li><label><input type="radio" id="payment_method_bacs" class="input-radio" name="payment_method" value="bacs" checked="checked"> Kredikartı</label></li>
+                            <li><label><input type="radio" id="payment_method_bacs" class="input-radio" name="payment_method" value="bacs"> EFT ya da Havale</label></li>
+                            <li><label><input type="radio" id="payment_method_cheque" class="input-radio" name="payment_method" value="cheque"> Kapıda Ödeme</label></li>
+                        </ul>
+                        <button type="submit" class="btn btn-success btn-lg SiparisVer">Ödeme Sayfasına Git</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

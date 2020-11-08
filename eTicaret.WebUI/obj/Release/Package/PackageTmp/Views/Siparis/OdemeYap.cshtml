@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "Odeme Yap";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+@model eTicaret.WebUI.App_Classes.Sepet
+
+<script src="~/Content/Js/bootstrap.min.js"></script>
+<script src="~/Content/Js/jquery-1.11.1.min.js"></script>
+
+<script>
+        $(".OdemeYap").click(function () {
+            document.forms["formCC"].submit();
+            alert("oki doki");
+        });
+    });
+</script>
+
+<link href="~/Content/Css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+<div class="content">
+    <!------ Include the above in your HEAD tag ---------->
+    <div class="container">
+        <div class='row'>
+
+            <div class="site-title"><div class="site-inside"><span>Ödeme Sayfası</span></div></div>
+            <div class="col-md-8">
+                <div class="order-title">Sipariş Detayı</div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="checkout-info">
+                            <li class="checkout-info-1">Ürünler</li>
+                            <li class="checkout-info-2">Toplam</li>
+                        </ul>
+
+                        <div class="checkout-info-box">
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model.Urunler)
+                                {
+                                    <ul class="checkout-product">
+                                        <li class="checkout-product-1">@item.Urun.Adi</li>
+                                        <li class="checkout-product-2">@item.Urun.SatiFiyat.ToString("0.##") ₺</li>
+                                    </ul>
+                                }
+                                <!-- CART DETAILS -->
+                                <ul class="checkout-product o-last">
+                                    <li class="checkout-product-1">Ara Toplam</li>
+                                    <li class="checkout-product-2">0 ₺</li>
+                                </ul>
+                                <ul class="checkout-product o-last">
+                                    <li class="checkout-product-1">Kargo</li>
+                                    <li class="checkout-product-2">0 ₺</li>
+                                </ul>
+                                <ul class="checkout-product last">
+                                    <li class="checkout-product-1">Toplam Tutar</li>
+                                    <li class="checkout-product-2">@Model.ToplamTutar.ToString("0.##") ₺</li>
+                                </ul>
+                            }
+                            <!-- CART DETAILS -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-4'>
+                <div class="order-title"><b>Kredi Kartı Bilgileri</b></div>
+                <script src="~/Content/Js/JavaScript.js" type='text/javascript'></script>
+                <form accept-charset="UTF-8" action="/Siparis/OdemeYap" class="require-validation" name="formCC" data-cc-on-file="false" data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj" id="payment-form" method="post">
+                    <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓" /><input name="_method" type="hidden" value="PUT" /><input name="authenticity_token" type="hidden" value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8=" /></div>
+                    <div class='form-row'>
+                        <div class='col-xs-12 form-group required'>
+                            <label class='control-label'>Kart Üzerindeki İsim</label>
+                            <input class='form-control' size='4' type='text'>
+                        </div>
+                    </div>
+                    <div class='form-row'>
+                        <div class='col-xs-12 form-group card required'>
+                            <label class='control-label'>Kart Numarası</label>
+                            <input autocomplete='off' class='form-control card-number' size='20' type='text'>
+                        </div>
+                    </div>
+                    <div class='form-row'>
+                        <div class='col-xs-4 form-group cvc required'>
+                            <label class='control-label'>CVC Kodu</label>
+                            <input autocomplete='off' class='form-control card-cvc' placeholder='örn. 311' size='4' type='text'>
+                        </div>
+                        <div class='col-xs-4 form-group expiration required'>
+                            <label class='control-label'>Tarih</label>
+                            <input class='form-control card-expiry-month' placeholder='AY' size='2' type='text'>
+                        </div>
+                        <div class='col-xs-4 form-group expiration required'>
+                            <label class='control-label'> </label>
+                            <input class='form-control card-expiry-year' placeholder='YIL' size='4' type='text'>
+                        </div>
+                    </div>
+                    <div class='form-row'>
+                        <div class='col-md-12'>
+                            <div class='form-control total btn btn-info'>
+                                <b>Kartınızdan çekilecek miktar:</b>
+                                @if (Model != null)
+                                {
+                                    <span class='amount'>@Model.ToplamTutar.ToString("0.##") ₺</span>
+                                }
+                                <
+                            </div>
+                        </div>
+                    </div>
+                    <div class='form-row'>
+                        <div class='col-md-12 form-group'>
+                            <br /><br />
+                            <button class='btn btn-success btn-group-justified btn-lg OdemeYap' type='submit'>Ödeme Yap »</button>
+                        </div>
+                    </div>
+                    <div class='form-row'>
+                        <div class='col-md-12 error form-group hide'>
+                            <div class='alert-danger alert'>
+                                Please correct the errors and try again.
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class='col-md-4'></div>
+        </div>
+    </div>
+</div>
+

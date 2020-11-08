@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "Yorumlarım";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+@{
+    ViewBag.Title = "Adreslerim";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+@using eTicaret.WebUI.Models
+@model IEnumerable<eTicaret.WebUI.Models.Yorum>
+
+<link rel="shortcut icon" href="/Content/Admin/img/favicon.png">
+<!-- Bootstrap core CSS -->
+<link href="/Content/Admin/css/bootstrap.min.css" rel="stylesheet">
+<link href="/Content/Admin/css/bootstrap-reset.css" rel="stylesheet">
+<!--external css-->
+<link href="/Content/Admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<!-- Custom styles for this template -->
+<link href="/Content/Zeon/css/style.css" rel="stylesheet">
+<link href="~/Content/Css/style.css" rel="stylesheet">
+<link href="/Content/Admin/css/style-responsive.css" rel="stylesheet" />
+
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <aside class="profile-nav col-lg-3">
+                <section class="panel">
+                    <div class="user-heading round">
+                        <a href="#">
+                        </a>
+                        <h1 style="color:white">@User.Identity.Name</h1>
+                        <p></p>
+                    </div>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="/Uye/Hesabim"> <i class="icon-user"></i>Hesabım</a></li>
+                        <li class="active"><a href="/Uye/Adreslerim"> <i class="icon-calendar"></i> Adreslerim <span class="label label-danger pull-right r-activity">@Model.Count()</span></a></li>
+                        <li><a href="/Uye/Siparislerim"> <i class="icon-calendar"></i> Siparişlerim <span class="label label-danger pull-right r-activity"></span></a></li>
+                        <li><a href="/Uye/Yorumlarim"> <i class="icon-calendar"></i> Yorumlarım <span class="label label-danger pull-right r-activity"></span></a></li>
+                    </ul>
+                </section>
+            </aside>
+
+            <aside class="profile-info col-lg-9">
+                <section class="panel">
+
+                    <div class="panel-body bio-graph-info">
+                        <div class="btn-group btn-group-justified">
+                            <a href="/Uye/AdresEkle" class="btn btn-success btn-lg">Yeni Adres Ekle</a>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+
+            <aside class="profile-info col-lg-9">
+                <section class="panel">
+
+                    <div class="panel-body bio-graph-info">
+                        @foreach (Yorum yorum in Model)
+                        {
+                        <a href="/home/UrunDetay/@yorum.Urun.Adi"><h4>Ürün Adı  : @yorum.Urun.Adi</h4></a>
+                            <h4>Yorum Adı :@yorum.Adi</h4>
+                            <div class="row">
+
+                                <div class="home-blog-show">
+                                    <p style="font-size:medium"><span> @yorum.Yorum1</span></p>
+                                </div>
+                                <br /><br /><br />
+                                <div class="btn-group pull-right">
+                                    <a class="btn btn-danger" href="/Uye/YorumSil/@yorum.Id" name="id">Sil</a>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </div>
+</div>
+
+<script src="/Content/Admin/js/jquery.js"></script>
+<script src="/Content/Admin/js/bootstrap.min.js"></script>
+<script class="include" type="text/javascript" src="/Content/Admin/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="/Content/Admin/js/jquery.scrollTo.min.js"></script>
+<script src="/Content/Admin/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="/Content/Admin/assets/jquery-knob/js/jquery.knob.js"></script>
+<script src="/Content/Admin/js/respond.min.js"></script>
+<script>
+    //knob
+    $(".knob").knob();</script>

@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Siparislerim";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+@using eTicaret.WebUI.App_Classes
+@*@model IEnumerable<eTicaret.WebUI.Models.SiparisDetay>*@
+@model IEnumerable<ViewModel>
+
+<link rel="shortcut icon" href="/Content/Admin/img/favicon.png">
+<!-- Bootstrap core CSS -->
+<link href="/Content/Admin/css/bootstrap.min.css" rel="stylesheet">
+<link href="/Content/Admin/css/bootstrap-reset.css" rel="stylesheet">
+<!--external css-->
+<link href="/Content/Admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<!-- Custom styles for this template -->
+<link href="/Content/Zeon/css/style.css" rel="stylesheet">
+<link href="~/Content/Css/style.css" rel="stylesheet">
+<link href="/Content/Admin/css/style-responsive.css" rel="stylesheet" />
+
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <aside class="profile-nav col-lg-3">
+                <section class="panel">
+                    <div class="user-heading round">
+                        <a href="#">
+                        </a>
+                        <h1 style="color:white">@User.Identity.Name</h1>
+                        <p></p>
+                    </div>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="/Uye/Hesabim"> <i class="icon-user"></i>Hesabım</a></li>
+                        <li><a href="/Uye/Adreslerim"> <i class="icon-calendar"></i> Adreslerim <span class="label label-danger pull-right r-activity"></span></a></li>
+                        <li class="active"><a href="/Uye/Siparislerim"> <i class="icon-calendar"></i> Siparişlerim <span class="label label-danger pull-right r-activity"></span></a></li>
+                        <li><a href="/Uye/Yorumlarim"> <i class="icon-calendar"></i> Yorumlarım <span class="label label-danger pull-right r-activity"></span></a></li>
+                    </ul>
+                </section>
+            </aside>
+
+            <aside class="profile-info col-lg-9">
+                <section class="panel"></section>
+            </aside>
+
+            <aside class="profile-info col-lg-9">
+
+                <section class="panel">
+                    <div class="panel-body bio-graph-info">
+                        @{
+                            int satisid = 0;
+
+                            foreach (var x in Model)
+                            {
+
+                                if (satisid != x.sdetay.SatisID)
+                                {
+                                    <div class="panel-body bio-graph-heading">
+                                        <h1 style="color:white">Sipariş No: @x.satis.Id - Tarih: @x.satis.SatisTarihi</h1>
+                                        <p><b>Siparis Durum:</b></p>
+                                        @if (x.satis.SiparisDurumID == 4)
+                                        {
+                                            <p>Kargoya Verildi</p>
+                                        }
+                                        else
+                                        {
+                                            <p>@x.satis.SiparisDurum.Adi</p>
+                                        }
+
+                                        @if (x.satis.KargoID != null)
+                                        {
+                                            <p><b>Kargo Şirketi: @x.satis.Kargo.SirketAdi</b></p>
+                                            <p><b>Kargo Takip No: @x.satis.KargoTakipNo</b></p>
+                                        }
+
+                                        <p><b>Toplam Tutar: @x.satis.ToplamTutar.ToString("0.##") ₺</b></p>
+                                    </div>
+                                }
+                                <div class="panel-body bio-graph-info">
+                                    @if (x.satis.Id == x.sdetay.SatisID && x.urunu.Id == x.sdetay.UrunID)
+                                    {
+                                        <p><b>Ürün Adı: @x.urunu.Adi <br />Fiyatı : @x.sdetay.Fiyat ₺</b></p>
+
+
+                                    }
+                                    <br /><br /><br />
+                                    @if (x.satis.SiparisDurumID == 1)
+                                    {
+                                        <div class="btn-group pull-right">
+                                            <a class="btn btn-danger" href="/Uye/SiparisIptal/" name="id">Iptal</a>
+                                        </div>
+                                    }
+
+                                </div>
+                                satisid = x.sdetay.SatisID;
+                            }
+                        }
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </div>
+</div>
+
+<script src="/Content/Admin/js/jquery.js"></script>
+<script src="/Content/Admin/js/bootstrap.min.js"></script>
+<script class="include" type="text/javascript" src="/Content/Admin/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="/Content/Admin/js/jquery.scrollTo.min.js"></script>
+<script src="/Content/Admin/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="/Content/Admin/assets/jquery-knob/js/jquery.knob.js"></script>
+<script src="/Content/Admin/js/respond.min.js"></script>
+<script>
+    //knob
+    $(".knob").knob();</script>
+
